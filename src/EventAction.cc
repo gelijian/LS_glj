@@ -102,7 +102,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
         G4double EeeRaw = LOPutil::GetInstance() -> GetEee(edep, particleName);
         Eee += EeeRaw;
     }
-    if (GetEee > 10)
+    if (Eee > threshold)
     {
         analysisManager->FillNtupleDColumn(0, Eee);
         analysisManager->FillNtupleIColumn(1, NumProtonHits);
