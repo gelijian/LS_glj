@@ -80,7 +80,8 @@ void EventAction::EndOfEventAction(const G4Event* event)
     G4int nofHits = HC->entries();
     if (nofHits == 0)
         return;
-        
+    
+    G4double threshold = 10;
     G4double Eee = 0.0;
     G4int NumProtonHits = 0;
     G4int NumCarbonHits = 0;
@@ -101,10 +102,13 @@ void EventAction::EndOfEventAction(const G4Event* event)
         G4double EeeRaw = LOPutil::GetInstance() -> GetEee(edep, particleName);
         Eee += EeeRaw;
     }
-    analysisManager->FillNtupleDColumn(0, Eee);
-    analysisManager->FillNtupleIColumn(1, NumProtonHits);
-    analysisManager->FillNtupleIColumn(2, NumCarbonHits);
-    analysisManager->AddNtupleRow();
+    if (GetEee > 10)
+    {
+        analysisManager->FillNtupleDColumn(0, Eee);
+        analysisManager->FillNtupleIColumn(1, NumProtonHits);
+        analysisManager->FillNtupleIColumn(2, NumCarbonHits);
+        analysisManager->AddNtupleRow();
+    }
 }  
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
