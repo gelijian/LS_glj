@@ -135,6 +135,9 @@ void PhysicsList::SetCuts()
 	// because some processes for e+/e- need cut values for gamma
 	//
     SetCutsWithDefault();
+    G4double electronCut = 0.005 * mm;
+    SetCutValue(electronCut, "e+");
+    SetCutValue(electronCut, "e-");
      
 	if (verboseLevel>0) DumpCutValuesTable();
     G4cout << "come Phys Cuts Setting" << G4endl;
